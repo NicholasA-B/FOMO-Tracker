@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FOMO Tracker io</title>
+    </head>
+    <body class="terminal">
+            <!--Container Div-->        
+            <div class="terminal" id="tracker"></div>
+            
+            <p id="foo">
+
+            </p>
+            <form onsubmit="DirectUserCommand()" class="terminal">
+                <input button="text" id="userInput" > 
+            </form>
+
+    </body>
+</html>
+
+<script>
+init();
+
+//Initial Load Function
+function init(){
+    RenderLoadingScreen();
+}
+
+function FetchPriceData(userInput){
+  return fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${userInput}`)
+    .then(response => response.json())
+    .then(item => {
+
+        let symbol = document.createElement("p");
+        let price = document.createElement("p");  
+        symbol.innerHTML = item.symbol;
+        price.innerHTML = item.price;
+        console.log(price);
+        foo.appendChild(symbol);
+        symbol.appendChild(price);
+
+        document.getElementById("userInput").value = "";   
+    }
+
+               
+    );  
+}
+
+
+//Receives user input and directs it elsewhere
+function DirectUserCommand(e){
+    event.preventDefault();
+
+    var foo = document.getElementById("foo");
+    var buffer = "";
+    var userInput = document.getElementById("userInput").value;
+
+    let element = document.createElement("p");
+     element.innerHTML = userInput;  
+     foo.appendChild(element);
+
+    switch(userInput){
+        case "help":
+        GiveUserHelpCommands();
+            break;
+        case "clear":
+        ClearUserHerstory();
+            break;
+        case "example":
+        GiveUserExample();
+            break;
+        default: 
+        FetchPriceData(userInput);    
+    }
+
+    document.getElementById("userInput").value = "";    
+
+}
+
+//Update help cmds
+function GiveUserHelpCommands(){
+    var helpCmds = "Type `help' to see this list. <br>" +
+                    "Type `example` to see an example of what should be typed. <br>" +
+                    "Use info bash to find out more about the shell in general. <br>" + 
+                    "Use man -k or info' to find out more about commands not in this list. <br>" +
+                    "A star (*) next to a name means that the command is disabled. <br>" +
+                    "Expression              Action/Description <br>" +
+                   " --------- [Symbol][Symbol]        Pair two asset values to receive relevent price.";
+    
+     let element = document.createElement("p");
+     element.innerHTML = helpCmds;  
+     foo.appendChild(element);
+        
+}
+
+//Update giveuserexample to show an example
+function GiveUserExample(){
+    var exampleText = "Try typing `ETHBTC` to see the relevent price.";
+    
+     let element = document.createElement("p");
+     element.innerHTML = exampleText;  
+     foo.appendChild(element);
+        
+}
+
+//Update clearuserherstory to clear the loading screen 
+function ClearUserHerstory(){
+    foo.innerHTML = "";
+    tracker.innerHTML = "";
+}
+
+//Animates and renders the loading screen
+function RenderLoadingScreen(){  
+}
+
+
+var myText = "**fomotracker client v0.1 build 7481293**\n" +
+             "loading...\n" +
+             " \n" +
+             "getting viTalik on the line...\n" +
+             "[========================================] 100%\n" +
+             "done.\n" +
+             " \n" +
+             "putting him to sleep...\n" +
+             "[========================================] 100%\n" +
+             "done.\n" +
+             " \n" +
+             "dumping it again...\n" +
+             "[========================================] 100%\n" +
+             "done.\n" +
+             " \n" +
+             "installing korea fud...\n" +
+             "[========================================] 100%\n" +
+             "done.\n" +
+             " \n" +
+             "Press TAB to Enter digital assets to assess$";
+
+var myArray = myText.split("");
+var loopTimer;
+
+function frameLooper() {
+    if(myArray.length > 0) {
+       if(myArray[0] === "\n"){
+           document.getElementById("tracker").innerHTML += "<br>";
+        }
+        document.getElementById("tracker").innerHTML += myArray.shift();
+        } else {
+            clearTimeout(loopTimer);
+            return false;
+        }
+        loopTimer = setTimeout('frameLooper()',15);
+    
+    }
+    frameLooper();    
+    
+
+</script>
+
+<style>
+
+.terminal{
+    color:#66ff00;
+    background-color: black;
+    font-family: monospace;
+}
+
+h1{
+    color:#66ff00;
+    
+}
+
+#userInput{
+    color:#66ff00;
+    background-color: black;
+    border: none;
+    outline: none;
+}
+
+
+</style>
+
