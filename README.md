@@ -3,6 +3,7 @@
 This project uses Binance API to track prices of cryptocurrencies using HTML/CSS/JS. 
 
 Commands:
+
 help - Displays the help list.
 clear - Clears the current session user input. 
 example - Shows an example on how to type the ticker symbols to the prices checked. 
