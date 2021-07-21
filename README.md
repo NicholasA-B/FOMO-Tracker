@@ -1,6 +1,6 @@
 # FOMO-Tracker
 
-This project uses Binance API to track prices of cryptocurrencies using HTML/CSS/JS. 
+This project uses Binance API to track prices of cryptocurrencies using HTML and embedded CSS/JS. 
 
 
 Commands:
