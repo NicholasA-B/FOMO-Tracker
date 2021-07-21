@@ -2,6 +2,7 @@
 
 This project uses Binance API to track prices of cryptocurrencies using HTML/CSS/JS. 
 
+
 Commands:
 
 help - Displays the help list.
